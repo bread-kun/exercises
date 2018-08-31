@@ -22,9 +22,14 @@ def generate_cards(n):
 	def l_insert(pre_harf_list, harf_list):
 		print("{} ---> {}".format(harf_list, pre_harf_list))
 		__pre_len = len(pre_harf_list)
+		# 单数逆一张
+		if (__pre_len/2) > int(__pre_len/2):
+			_t = harf_list.pop()
+			harf_list.insert(0,_t)
+			pass
 		for i in range(0,len(harf_list)):
 			pre_harf_list.insert(1+2*(i), harf_list[i])
-		return pre_harf_list[:__pre_len-1]
+		return pre_harf_list[:__pre_len]
 		pass
 	res_cards = list(range(1,n+1))
 	half_stack.append(res_cards)
@@ -36,14 +41,28 @@ def generate_cards(n):
 	for pre in range(1,len(half_stack)):
 		current_l = l_insert(half_stack[pre], current_l)
 		print(current_l)
-
+	return current_l
 	pass
 
-def print_request(card_lsit):
+def print_request(card_list):
+	_t_list = card_list.copy()
+	def mov2end(ls):
+		if len(ls)>1:
+			_t = ls.pop(0)
+			ls.append(_t)
+			pass
+		pass
+	for x in range(0,len(card_list)):
+		print(_t_list.pop(0))
+		mov2end(_t_list)
+		pass
 	pass
 
 def main():
-	generate_cards(16)
+	card_num = 16
+	res = generate_cards(card_num)
+	print("="*35)
+	print_request(res)
 	pass
 
 if __name__ == '__main__':
